@@ -1,0 +1,24 @@
+.slogans {
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-align: center;
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    height: 100px; /* Задайте высоту строки */
+    width: 800px;    
+  }
+  
+  .slogans p {
+    position: absolute;
+    width: 100%;
+    animation: fade-in-out 7s infinite; /* 4 секунды совпадают с интервалом */
+  }
+  
+  @keyframes fade-in-out {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+  }
+  
