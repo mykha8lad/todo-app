@@ -10,7 +10,7 @@ const CurrentTime = () => {
       setCurrentTime(dayjs());
     }, 1000);
 
-    return () => clearInterval(interval); // Очищаем таймер при размонтировании
+    return () => clearInterval(interval);
   }, []);
 
   return (

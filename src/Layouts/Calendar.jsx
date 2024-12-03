@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Calendar, Modal, Input, List, Button, Dropdown, Space, DatePicker, Select, Tag } from 'antd';
 import { TasksContext } from '../assets/components/TasksContext';
 import { EllipsisOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 
 const { TextArea } = Input;
@@ -81,13 +83,12 @@ const CalendarForm = () => {
               handleEditTask(index, updatedTask);
             }}
           >
-            Edit
-          </span>
+            <EditOutlined />  Edit</span>
         ),
       },
       {
         key: '2',
-        label: <span onClick={() => handleDeleteTask(index)}>Delete</span>,
+        label: <span onClick={() => handleDeleteTask(index)}><DeleteOutlined />  Delete</span>,
       },
     ],
   });

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Projects from './Layouts/Projects';
 import TaskList from './Layouts/ToDoList';
 import logo from './assets/images/icon.png';
+import ProjectsProvider from './assets/components/ProjectsContext';
 import {
   HomeFilled,
   FolderOpenFilled,  
@@ -24,6 +25,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import CalendarForm from './Layouts/Calendar';
 import CurrentTime from './assets/components/CurrentTime';
 import SloganRotator from './assets/components/SloganRotator';
+import Home from './Layouts/Home';
 dayjs.extend(customParseFormat);
 const items = [
   getItem('Home', '1', <HomeFilled />),
@@ -44,7 +46,7 @@ function App() {
   const renderContent = () => {
     switch (selectedKey) {
       case '1':
-        return <div>Welcome to the Home page!</div>;
+        return <Home/>;
       case '2':
         return <Projects/>;
       case '3':
@@ -58,6 +60,7 @@ function App() {
 
   return (
     <>
+    <ProjectsProvider>
       <Layout
       style={{
         minHeight: '100vh',
@@ -93,7 +96,7 @@ function App() {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>{items.find((item) => item.key === selectedKey)?.label}</Breadcrumb.Item>
+            {/* <Breadcrumb.Item>{items.find((item) => item.key === selectedKey)?.label}</Breadcrumb.Item> */}
           </Breadcrumb>
           <div
             style={{
@@ -115,6 +118,7 @@ function App() {
         </Footer>
       </Layout>
     </Layout>
+    </ProjectsProvider>
     </>
   )
 }

@@ -21,6 +21,28 @@ export const TasksProvider = ({ children }) => {
     }
   }, [tasks]);
 
+
+  useEffect(() => {
+    try {
+      const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+      if (storedTasks) {
+        setTasks(storedTasks);
+      }
+    } catch (error) {
+      console.error('Failed to load tasks:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (tasks) {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      }
+    } catch (error) {
+      console.error('Failed to save tasks:', error);
+    }
+  }, [tasks]);
+
   return (
     <TasksContext.Provider value={{ tasks, setTasks }}>
       {children}
