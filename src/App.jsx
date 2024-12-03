@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Projects from './Layouts/Projects';
 import TaskList from './Layouts/ToDoList';
 import logo from './assets/images/icon.png';
@@ -10,7 +10,7 @@ import {
   UnorderedListOutlined,
   CalendarOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Flex, Spin } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -36,8 +36,19 @@ const items = [
 
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState('1');
+
+  useEffect(() => {    
+    const loadData = async () => {
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setIsLoading(false);
+    };
+
+    loadData();
+  }, []);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -61,6 +72,17 @@ function App() {
   return (
     <>
     <ProjectsProvider>
+    {isLoading ? (
+        <Flex
+          style={{
+            height: '100vh',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Spin size="large" />
+        </Flex>
+      ) : (
       <Layout
       style={{
         minHeight: '100vh',
@@ -117,7 +139,7 @@ function App() {
           Taskly ©{new Date().getFullYear()} Created by STEP
         </Footer>
       </Layout>
-    </Layout>
+    </Layout>)};
     </ProjectsProvider>
     </>
   )
