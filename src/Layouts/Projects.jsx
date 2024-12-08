@@ -87,11 +87,12 @@ const Projects = () => {
     });
   };
   
-  const handleDeleteTask = (taskIndex) => {
-    setNewProject((prev) => ({
-      ...prev,
-      tasks: prev.tasks.filter((_, i) => i !== taskIndex),
-    }));
+  const handleDeleteTask = (projectIndex, taskIndex) => {
+    const updatedProjects = [...projects];
+    updatedProjects[projectIndex].tasks = updatedProjects[projectIndex].tasks.filter(
+      (_, i) => i !== taskIndex
+    );
+    setProjects(updatedProjects);
   };
   
   const handleEditProject = (index) => {
@@ -179,12 +180,12 @@ const Projects = () => {
                       }}
                     />
                     <Button
-                      type="link"
-                      danger
-                      icon={<DeleteOutlined />}
-                      onClick={() => handleDeleteTask(taskIndex)}
-                      style={{ marginLeft: '8px' }}
-                    >
+  type="link"
+  danger
+  icon={<DeleteOutlined />}
+  onClick={() => handleDeleteTask(index, taskIndex)}
+  style={{ marginLeft: '8px' }}
+>
                       Delete Task
                     </Button>
                   </div>

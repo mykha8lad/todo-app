@@ -20,15 +20,19 @@ const TaskList = () => {
   
   const handleAddTask = () => {
     const { title, dueDate } = newTask;
-    if (!title.trim() || !dueDate) return;
-
+    
+    if (!title.trim() || !dueDate) {
+      console.warn("Task title or due date is missing");
+      return;
+    }
+    
     const dateKey = dayjs(dueDate).format('YYYY-MM-DD');
-
+    
     setTasks((prevTasks) => ({
       ...prevTasks,
-      [dateKey]: [...(prevTasks[dateKey] || []), newTask],
+      [dateKey]: [...(prevTasks[dateKey] || []), { ...newTask }],
     }));
-    
+  
     setNewTask({
       title: '',
       description: '',
@@ -36,6 +40,7 @@ const TaskList = () => {
       tags: [],
       dueDate: null,
     });
+  
     setIsModalOpen(false);
   };
   

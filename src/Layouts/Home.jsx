@@ -23,9 +23,9 @@ const Home = () => {
   const getUpcomingDeadlines = () => {
     const currentDate = dayjs();
     let count = 0;
-    
-    Object.keys(tasks).forEach(date => {
-      tasks[date].forEach(task => {
+
+    Object.keys(tasks).forEach((date) => {
+      tasks[date].forEach((task) => {
         if (task.dueDate && dayjs(task.dueDate).isAfter(currentDate)) {
           count++;
         }
